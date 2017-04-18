@@ -13,7 +13,7 @@ for (var i=1; i<=9;i++){
 
   $('.elements').append('<div class="picture"></div>').css('top',pozition)
   // .css( "background-image", "url('"+imagesurl+"')");
-.css( "background-image", "url('.._include/img/0_0.png')");
+.css( "background-image", "url('_include/img/0_0.png')");
 
 }
 
