@@ -58,7 +58,7 @@ body {
   position: relative;
   display: inline-block;
   height: 420px;
-  width: 850;
+  width: 960px;
 }
 
 .picture {
@@ -93,117 +93,117 @@ body {
 
 .pazzl:nth-child(1){
   position: absolute;
-  left:10;
+  left:40;
   top:10;
 }
 
 .pazzl:nth-child(2){
   position: absolute;
-  left:140;
+  left:170;
   top:10;
 }
 
 .pazzl:nth-child(3){
   position: absolute;
-  left:270;
+  left:300;
   top:10;
 }
 
 .pazzl:nth-child(4){
   position: absolute;
-  left:10;
+  left:40;
   top:140;
 }
 
 .pazzl:nth-child(5){
   position: absolute;
-  left:140;
+  left:170;
   top:140;
 }
 
 .pazzl:nth-child(6){
   position: absolute;
-  left:270;
+  left:300;
   top:140;
 }
 
 .pazzl:nth-child(7){
   position: absolute;
-  left:10;
+  left:40;
   top:270;
 }
 
 .pazzl:nth-child(8){
   position: absolute;
-  left:140;
+  left:170;
   top:270;
 }
 
 .pazzl:nth-child(9){
   position: absolute;
-  left:270;
+  left:300;
   top:270;
 }
 
 .picture:nth-child(10){
   position: absolute;
   background-image: url('../img/0_0.png');
-  left:460;
+  left:510;
   top:10;
 }
 
 .picture:nth-child(11){
   position: absolute;
   background-image: url('../img/0_1.png');
-  left:590;
+  left:640;
   top:10;
 }
 
 .picture:nth-child(12){
   position: absolute;
   background-image: url('../img/0_2.png');
-  left:720;
+  left:770;
   top:10;
 }
 
 .picture:nth-child(13){
   position: absolute;
   background-image: url('../img/1_0.png');
-  left:460;
+  left:510;
   top:140;
 }
 
 .picture:nth-child(14){
   position: absolute;
   background-image: url('../img/1_1.png');
-  left:590;
+  left:640;
   top:140;
 }
 
 .picture:nth-child(15){
   position: absolute;
   background-image: url('../img/1_2.png');
-  left:720;
+  left:770;
   top:140;
 }
 
 .picture:nth-child(16){
   position: absolute;
   background-image: url('../img/2_0.png');
-  left:460;
+  left:510;
   top:270;
 }
 
 .picture:nth-child(17){
   position: absolute;
   background-image: url('../img/2_1.png');
-  left:590;
+  left:640;
   top:270;
 }
 
 .picture:nth-child(18){
   position: absolute;
   background-image: url('../img/2_2.png');
-  left:720;
+  left:770;
   top:270;
 }
