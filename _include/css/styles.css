@@ -6,7 +6,6 @@
   -ms-user-select: none;
   user-select: none;
 }
-
 /*Отключить стандартные отступы тела страницы*/
 body {
   margin: 0;
@@ -44,6 +43,7 @@ body {
 }
 
 .errormess{
+  display: inline-block;
   position: absolute;
   left: 125px;
   top: 150px;
@@ -51,12 +51,13 @@ body {
   border-radius: 12px;
   padding: 5px;
   z-index: 100;
+  font-size: 32px;
 }
 
 .content{
   position: relative;
   display: inline-block;
-  height: 500px;
+  height: 420px;
   width: 850;
 }
 
@@ -67,20 +68,20 @@ body {
   border:2px solid #FFFFFF;
 }
 
-.readybutton{
-  position: absolute;
+.ready{
+  position:relative;
+  display: inline-block;
   margin: 10px;
   font-size: 22px;
   padding: 3px 7px;
   border-radius: 5px;
   border: 2px solid #8BC34A;
-  bottom: 10px;
-  left:350px;
 }
 
-.wrongbutt{
+.ready.wrong{
   background-color: rgb(239, 38, 38);
   border: 2px solid rgb(255, 196, 2);
+
 }
 
 .pazzl{
