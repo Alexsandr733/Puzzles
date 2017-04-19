@@ -1,3 +1,5 @@
+
+
 /*Сделать весь текст невыделяемым*/
 * {
   -moz-user-select: none;
@@ -36,15 +38,51 @@ body {
   color: #464242;
   top: 10px;
 }
-.elements{
-position: relative;
+.title{
+  width: 100%;
+  margin-bottom: 15px;
 }
-.picture{
+/*.elements{
+position: relative;
+}*/
+.wrong{
+  width:365px;
+  height: 365px;
+  top: 10px;
+  float:left;
+  padding-left: 10px;
+
+}
+.inner-wrong{
+  margin-left:20px;
+}
+.puzzles{
+  width:365px;
+  height: 365px;
+  top: 10px;
+  float:left;
+  padding-left: 20px;
+}
+.inner-puzzles{
+
+}
+.table {
+  display: table;
+  width:360px;
+  border:1px solid black;
+  border-collapse:collapse;
+
+}
+.row {
+  display: table-row;
+  border:1px solid black;
+}
+.picture {
   width: 120px;
   height: 120px;
-  position: absolute;
-  top: 10px;
-	/*left: 825px;*/
-  /*background-image: url('../img/0_0.png');*/
-  /*background-size: 120px 120px;*/
+  display: table-cell;
+  border:1px solid #ff0000;
+}
+.ready{
+  margin: 10px;
 }
