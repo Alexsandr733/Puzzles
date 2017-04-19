@@ -112,10 +112,16 @@ body {
   background-color: rgb(239, 38, 38);
   border: 2px solid rgb(255, 196, 2);
 }
+.pazzl{
+  width: 120px;
+  height: 120px;
+  display: table-cell;
+  border:2px solid #FFFFFF;
+}
 
 
 /*Будет удалено сделано только для вёрстки*/
-.row:nth-child(1) .picture:nth-child(1){
+.row:nth-child(1) .picture:nth-child(1) .wrongs:nth-child(1){
   background-image: url('../img/0_0.png')
 }
 .row:nth-child(1) .picture:nth-child(2){
