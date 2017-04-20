@@ -81,7 +81,6 @@ body {
 .ready.wrong{
   background-color: rgb(239, 38, 38);
   border: 2px solid rgb(255, 196, 2);
-
 }
 
 .pazzl{
@@ -144,66 +143,3 @@ body {
   left:300;
   top:270;
 }
-/*
-.picture:nth-child(10){
-  position: absolute;
-  background-image: url('../img/0_0.png');
-  left:510;
-  top:10;
-}
-
-.picture:nth-child(11){
-  position: absolute;
-  background-image: url('../img/0_1.png');
-  left:640;
-  top:10;
-}
-
-.picture:nth-child(12){
-  position: absolute;
-  background-image: url('../img/0_2.png');
-  left:770;
-  top:10;
-}
-
-.picture:nth-child(13){
-  position: absolute;
-  background-image: url('../img/1_0.png');
-  left:510;
-  top:140;
-}
-
-.picture:nth-child(14){
-  position: absolute;
-  background-image: url('../img/1_1.png');
-  left:640;
-  top:140;
-}
-
-.picture:nth-child(15){
-  position: absolute;
-  background-image: url('../img/1_2.png');
-  left:770;
-  top:140;
-}
-
-.picture:nth-child(16){
-  position: absolute;
-  background-image: url('../img/2_0.png');
-  left:510;
-  top:270;
-}
-
-.picture:nth-child(17){
-  position: absolute;
-  background-image: url('../img/2_1.png');
-  left:640;
-  top:270;
-}
-
-.picture:nth-child(18){
-  position: absolute;
-  background-image: url('../img/2_2.png');
-  left:770;
-  top:270;
-}*/
