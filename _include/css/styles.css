@@ -90,6 +90,52 @@ body {
   border:2px solid #FFFFFF;
 }
 
+div .picture .pic0-0{
+  position: absolute;
+  background-image: url('../img/0_0.png');
+}
+
+.picture .pic0-1{
+  position: absolute;
+  background-image: url('../img/0_1.png');
+
+}
+
+.picture .pic0-2{
+  position: absolute;
+  background-image: url('../img/0_2.png');
+}
+
+.picture .pic1-0{
+  position: absolute;
+  background-image: url('../img/1_0.png');
+}
+
+.picture .pic1-1{
+  position: absolute;
+  background-image: url('../img/1_1.png');
+}
+
+.picture .pic1-2{
+  position: absolute;
+  background-image: url('../img/1_2.png');
+}
+
+.picture .pic2-0{
+  position: absolute;
+  background-image: url('../img/2_0.png');
+}
+
+.picture .pic2-1{
+  position: absolute;
+  background-image: url('../img/2_1.png');
+}
+
+.picture .pic2-2{
+  position: absolute;
+  background-image: url('../img/2_2.png');
+}
+
 .pazzl:nth-child(10){
   position: absolute;
   left:40;
