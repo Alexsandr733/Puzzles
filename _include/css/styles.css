@@ -84,108 +84,91 @@ body {
 }
 
 .pazzl{
+  position: absolute;
   width: 120px;
   height: 120px;
   display: table-cell;
   border:2px solid #FFFFFF;
 }
 
-div .picture .pic0-0{
-  position: absolute;
+.picture .pic0-0{
   background-image: url('../img/0_0.png');
 }
 
 .picture .pic0-1{
-  position: absolute;
   background-image: url('../img/0_1.png');
 
 }
 
 .picture .pic0-2{
-  position: absolute;
   background-image: url('../img/0_2.png');
 }
 
 .picture .pic1-0{
-  position: absolute;
   background-image: url('../img/1_0.png');
 }
 
 .picture .pic1-1{
-  position: absolute;
   background-image: url('../img/1_1.png');
 }
 
 .picture .pic1-2{
-  position: absolute;
   background-image: url('../img/1_2.png');
 }
 
 .picture .pic2-0{
-  position: absolute;
   background-image: url('../img/2_0.png');
 }
 
 .picture .pic2-1{
-  position: absolute;
   background-image: url('../img/2_1.png');
 }
 
 .picture .pic2-2{
-  position: absolute;
   background-image: url('../img/2_2.png');
 }
 
-.pazzl:nth-child(10){
-  position: absolute;
+.pazzl .p1{
   left:40;
   top:10;
 }
 
 .pazzl:nth-child(11){
-  position: absolute;
   left:170;
   top:10;
 }
 
 .pazzl:nth-child(12){
-  position: absolute;
   left:300;
   top:10;
 }
 
 .pazzl:nth-child(13){
-  position: absolute;
   left:40;
   top:140;
 }
 
 .pazzl:nth-child(14){
-  position: absolute;
   left:170;
   top:140;
 }
 
 .pazzl:nth-child(15){
-  position: absolute;
   left:300;
   top:140;
 }
 
 .pazzl:nth-child(16){
-  position: absolute;
   left:40;
   top:270;
 }
 
 .pazzl:nth-child(17){
-  position: absolute;
   left:170;
   top:270;
 }
 
 .pazzl:nth-child(18){
-  position: absolute;
   left:300;
   top:270;
 }
