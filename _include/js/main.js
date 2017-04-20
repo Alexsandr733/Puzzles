@@ -15,29 +15,19 @@ function detect (obj){
 }
 
 function randomPoz (obj) {
-  var imagesclass = '';
-  var images = '';
-  for (var i=0; i<=8;i++){
-    var randX = getRandom(510, 770);
-    var randY = getRandom(10, 270);
-    // генерируем имя класса картинки
-    var iter=0;
-    if(i>=0 && i<=2){
-      images = '0-'+i;
-    }
-    if(i>=3 && i<=5){
-      iter=i-3;
-      images='1-'+iter;
-    }
-    if(i>=6 && i<=8){
-      iter=i-6;
-      images='2-'+iter;
-    }
-    imagesclass = 'pic'+images;
-    console.log(imagesclass);
+  for (var z=0; z<=8;z++){
+    var index = 0;
+    for (var i=0; i<=2; i++){
+      for (var j=0; j<=2; j++){
 
-    obj.picture[i].addClass(imagesclass);
-    obj.picture[i].css({left: randX, top: randY});
-    //.css( "background-image", "url('"+imagesurl+"')")
+        var randX = getRandom(510, 770);
+        var randY = getRandom(10, 270);
+
+        obj.picture[index].addClass('pic' + i + "-" + j);
+        obj.picture[index].css({left: randX, top: randY});
+
+        index++;
+      }
+    }
   }
 }
