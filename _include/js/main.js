@@ -6,10 +6,9 @@ function getRandom(min, max){
 function detect (obj){
   var png = [];
   var cell = [];
-  for( var i = 1; i <= 9; i++){
-    var massi = i-1;
-    png[massi] =   $(".picture").eq(massi);
-    cell[massi] =  $(".pazzl").eq(massi);
+  for( var i = 0; i < 9; i++){
+    png[i] = obj.content.find(".picture").eq(i);
+    cell[i] = obj.content.find(".pazzl").eq(i);
   }
   obj.picture = png;
   obj.pazzle = cell;
