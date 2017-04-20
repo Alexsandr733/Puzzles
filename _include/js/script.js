@@ -1,6 +1,7 @@
   $(document).ready(function() {
   //   // При загрузке страницы выполнится весь написанный здесь код
-  //var check = [];
+  var check = [];
+
   var data = {
     button:$('.ready'),
     checkMass:check =[]
@@ -8,8 +9,8 @@
 
 
 
-  function getRandom(){
-    return Math.round(Math.random() * (9 - 1) + 1);
+  function getRandom(min, max){
+    return Math.round(Math.random() * (max - min) + min);
   }
 
   function detect (){
@@ -17,38 +18,43 @@
     var cell = [];
     for( var i = 1; i <= 9; i++){
       var massi = i-1;
-      cell[massi] =   $(".picture").eq(i);
-      png[massi] =  $(".pazzl").eq(i);
+      png[massi] =   $(".picture").eq(massi);
+      cell[massi] =  $(".pazzl").eq(massi);
     }
+      console.log(png);
+      console.log(cell);
     data.picture = png;
     data.pazzle = cell;
-
-
   }
   detect ();
 
   function randomPoz () {
-    var r=getRandom();
-    var fl=0;
-    var j;
-    if(data.checkMass.length === 0){
-      data.checkMass[0]=r;
-    }
-    while (fl === 0) {
-      r = getRandom();
-      for (j = 0; j < data.checkMass.length; j++) {
-        if (data.checkMass[j] === r) {
-          fl++;
-          return fl;
-        }
+    var imagesurl = '';
+    var images = '';
+    for (var i=0; i<=8;i++){
+      var randX = getRandom(510, 770);
+      var randY = getRandom(10, 270);
+      // генерируем имя картинки
+      var iter=0;
+      if(i>=0 && i<=2){
+        images = '0_'+i;
       }
+      if(i>=3 && i<=5){
+        iter=i-3;
+        images='1_'+iter;
+      }
+      if(i>=6 && i<=8){
+        iter=i-6;
+        images='2_'+iter;
+      }
+      //var step = i+9;
+      imagesurl = '_include/img/'+images+'.png';
+      console.log(images);
+      data.picture[i].css({left: randX, top: randY}).css( "background-image", "url('"+imagesurl+"')");
+
     }
-    alert(data.checkMass[0]+'its 0');
-    data.checkMass[j]=r;
-    return r;
   }
   randomPoz ();
-
 
 
 });
