@@ -1,15 +1,15 @@
-  $(document).ready(function() {
+  //$(document).ready(function() {
 
-    var data = {
-      button:$('.ready'),
-      content:$(".content"),
-      AllPicture:$(".picture")
-
-    };
-
-    detect (data);
-    randomPoz (data);
-    drag (data);
+    // var data = {
+    //   button:$('.ready'),
+    //   content:$(".content"),
+    //   AllPicture:$(".picture")
+    //
+    // };
+    //
+    // detect (data);
+    // randomPoz (data);
+    // drag (data);
 
     function getRandom(min, max){
       return Math.round(Math.random() * (max - min) + min);
@@ -95,12 +95,7 @@
 
 
           console.log(pos.centerLeft);
-          if ((pos.centerLeft>pos.borderLeft && pos.centerLeft<pos.borderRight && pos.centerTop>pos.borderTop && pos.centerTop<pos.borderBottom)==false){
 
-            elem.off("mouseup");
-            parents.off("mousemove");
-
-          }
 
           // Новая позиция элемента
           pos.new_pos = {
@@ -111,6 +106,25 @@
           pos.center = {
             left:pos.new_pos.left/2,
             top:pos.cursor.top/2
+          }
+          if ((pos.centerLeft>pos.borderLeft && pos.centerTop>pos.borderTop )==false){
+
+            elem.off("mouseup");
+            parents.off("mousemove");
+
+            pos.new_pos.left +=5; // чтобы не прилипала к левому краю
+            pos.new_pos.top +=5 // чтобы не прилипала к верху
+
+          }
+
+          if ((pos.centerLeft<pos.borderRight && pos.centerTop<pos.borderBottom)==false) {
+
+            elem.off("mouseup");
+            parents.off("mousemove");
+
+            pos.new_pos.left -=5; // чтобы не прилипала к правому краю
+            pos.new_pos.top -=5   // чтобы не прилипала к низу
+
           }
 
           elem.css(pos.new_pos);
@@ -124,4 +138,4 @@
           });
         });
       }
-  });
+  //});
