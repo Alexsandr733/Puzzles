@@ -1,4 +1,4 @@
-  $(document).ready(function() {
+  //$(document).ready(function() {
     // При загрузке страницы выполнится весь написанный здесь код
     var data = {
       button:$('.ready'),
@@ -9,4 +9,4 @@
     randomPoz (data);
     drag (data);
 
-  });
+//  });
