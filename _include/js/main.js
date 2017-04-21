@@ -49,7 +49,7 @@
           }
       }
 
-    var form = data.picture;
+  //  var form = data.picture;
 
     function mousedownDetect (obj) {
       obj.content.on("mousedown",function(event){
@@ -87,9 +87,9 @@
 
         var parents = obj.content;
 
-        //var elem = obj.picture[iter];
+        var elem = obj.picture[iter];
         //var elem = obj.picture[1];
-        var elem = obj.test;
+        //var elem = obj.test;
 
 
 
