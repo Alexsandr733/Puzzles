@@ -1,4 +1,5 @@
-  $(document).ready(function() {
+//document.addEventListener("DOMContentLoaded", function(event) {
+  //$(document).ready(function() {
 
     // var data = {
     //   button:$('.ready'),
@@ -45,7 +46,6 @@
         }
     }
 
-
     // начинаем двигать
     function drag (obj){
       //mousedownDetect (obj);
@@ -79,10 +79,6 @@
             top: event.pageY
           };
 
-          // console.log(pos.cursor);
-
-          //console.log(elem.offset());
-
           pos.element = elem.offset();
 
           pos.centerLeft = pos.element.left+60;
@@ -92,10 +88,6 @@
           pos.borderRight = pos.parents.left + 960;
           pos.borderTop = pos.parents.top-70;
           pos.borderBottom = pos.parents.top + 560-70;
-
-
-          console.log(pos.centerLeft);
-
 
           // Новая позиция элемента
           pos.new_pos = {
@@ -138,4 +130,4 @@
           });
         });
       }
-  });
+  //});
