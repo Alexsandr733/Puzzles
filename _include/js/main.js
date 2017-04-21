@@ -90,8 +90,8 @@
           elem.off("mouseup");
           parents.off("mousemove");
 
-          pos.new_pos.left +=5; // чтобы не прилипала к левому краю
-          pos.new_pos.top +=5 // чтобы не прилипала к верху
+           pos.new_pos.left +=2; // чтобы не прилипала к левому краю
+           pos.new_pos.top +=2 // чтобы не прилипала к верху
 
         }
 
@@ -100,8 +100,8 @@
           elem.off("mouseup");
           parents.off("mousemove");
 
-          pos.new_pos.left -=5; // чтобы не прилипала к правому краю
-          pos.new_pos.top -=5   // чтобы не прилипала к низу
+           pos.new_pos.left -=2; // чтобы не прилипала к правому краю
+           pos.new_pos.top -=2   // чтобы не прилипала к низу
 
         }
 
