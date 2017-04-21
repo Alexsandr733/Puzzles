@@ -2,12 +2,15 @@
 
     var data = {
       button:$('.ready'),
-      content:$(".content")
+      content:$(".content"),
+      test:$(".picture")
+    //  mouseEl:0
     };
 
     detect (data);
     randomPoz (data);
-    drag (data);
+    mousedownDetect (data);
+    //drag (data);
 
 
 
@@ -45,34 +48,49 @@
             }
           }
       }
-    //  	data.picture.on()
+
     var form = data.picture;
 
+    function mousedownDetect (obj) {
+      obj.content.on("mousedown",function(event){
 
+
+
+      var targ = event.target.className;
+      console.log(targ);
+
+      for (var i = 0; i < 9; i++) {
+        if (obj.picture[i].hasClass(targ)) {
+          obj.mouseEl = i;
+          console.log(obj.picture[i]);
+
+          return(obj.picture[i]);
+        }
+      }
+          //  console.log(obj.picture);
+          //  console.log(obj.picture[5]);
+            console.log(obj.mouseEl);
+
+      });
+        drag (data);
+    }
 
     // начинаем двигать
     function drag (obj){
+      //mousedownDetect (obj);
 
+        console.clear();
 
+        var iter = obj.mouseEl;
+        console.log( obj.picture[iter]+' in drug');
+        console.log(obj.picture[1]+' in drug');
 
-          obj.content.on("mousedown",function(event){
-
-          var targ = event.target.className;
-          console.log(targ);
-          var massIndex = $.inArray(targ, obj.picture.className)
-          console.log(obj.picture);
-          console.log(massIndex);
-
-          });
-
-
-
-      console.clear();
-
-      // var elem = $(".elem")
-      // var parents = $(".parent
         var parents = obj.content;
-        var elem = obj.picture[5];
+
+        //var elem = obj.picture[iter];
+        //var elem = obj.picture[1];
+        var elem = obj.test;
+
 
 
       // События нажатия
