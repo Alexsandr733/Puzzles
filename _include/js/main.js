@@ -36,35 +36,49 @@
     // начинаем двигать
   function drag (obj){
     //mousedownDetect (obj);
+    console.log($('mouseX'));
 
     console.clear();
 
     var parents = obj.content;
-    var elem = obj.AllPicture;
+    var elems = obj.allPicture;
+    var body  = obj.container;
 
-      // События нажатия
-    elem.on('mousedown', function(event) {
+    // События нажатия
+    body.on('mousemove', function(event) {
+      obj.coordinates = {
+        left: event.pageX,
+        top: event.pageY
+      };
+    //  console.log(obj.coordinates);
+    });
 
-    var elem = $(this);
+    elems.on('mousedown', function(event) {
 
-    var pos = {};
+      var elem = $(this);
+      var pos = {};
 
-    // Запомнить позицию курсора относительно элемента
-    pos.inner = {
-      left: event.offsetX,
-      top: event.offsetY
-    };
+      // Запомнить позицию курсора относительно элемента
+      pos.inner = {
+        left: event.offsetX,
+        top: event.offsetY
+      };
 
       // Событие перетаскивания
       parents.on('mousemove', function(event) {
 
-          // Позиция родителя относительно экрана
+        // Позиция родителя относительно экрана
         pos.parents = parents.offset();
-          // Позиция курсора относительно экрана
+        // Позиция курсора относительно экрана
         pos.cursor = {
           left: event.pageX,
           top: event.pageY
         };
+
+        // console.log(pos.cursor);
+        // console.log('element');
+        // console.log(pos.element);
+        // console.log(pos.parents);
 
         pos.element = elem.offset();
 
@@ -75,44 +89,42 @@
 
         pos.borderLeft = pos.parents.left;
         pos.borderRight = pos.parents.left + 960;
-        pos.borderTop = pos.parents.top-67;
-        pos.borderBottom = pos.parents.top + 560-70;
+        pos.borderTop = pos.parents.top;
+        pos.borderBottom = pos.parents.top + 420;
 
-          // Новая позиция элемента
+        //  Новая позиция элемента
         pos.new_pos = {
           left: pos.cursor.left - pos.parents.left - pos.inner.left,
           top: pos.cursor.top - pos.parents.top - pos.inner.top
         };
+        // 547 100
 
+        console.log(obj.coordinates);
 
-        if ((  pos.objectLeft>pos.borderLeft && pos.objectTop>pos.borderTop )==false){
-
-          elem.off("mouseup");
-          parents.off("mousemove");
-
-           pos.new_pos.left +=2; // чтобы не прилипала к левому краю
-           pos.new_pos.top +=2 // чтобы не прилипала к верху
-
+        if (pos.new_pos.left<0){
+          pos.new_pos.left = 0;
         }
-
-        if ((pos.objectRight<pos.borderRight && pos.objectBottom<pos.borderBottom)==false) {
-
-          elem.off("mouseup");
-          parents.off("mousemove");
-
-           pos.new_pos.left -=2; // чтобы не прилипала к правому краю
-           pos.new_pos.top -=2   // чтобы не прилипала к низу
-
+        if (pos.new_pos.top<0){
+          pos.new_pos.top = 0;
+        }
+        //console.log(pos.new_pos.top);
+        if (pos.new_pos.left>836){
+          pos.new_pos.left = 836;
+        }
+        if (pos.new_pos.top>297){
+          pos.new_pos.top = 297;
         }
 
         elem.css(pos.new_pos);
       });
 
         elem.on('mouseup', function() {
-          var elem = $(this)
+          var elem = $(this);
           // Снять события перетаскивания и отжатия мыши
           elem.off("mouseup");
           parents.off("mousemove");
         });
       });
-    }
+  //  });//qqq
+
+  }
