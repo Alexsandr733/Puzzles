@@ -45,14 +45,6 @@
     var body  = obj.container;
 
     // События нажатия
-    body.on('mousemove', function(event) {
-      obj.coordinates = {
-        left: event.pageX,
-        top: event.pageY
-      };
-    //  console.log(obj.coordinates);
-    });
-
     elems.on('mousedown', function(event) {
 
       var elem = $(this);
@@ -74,11 +66,6 @@
           left: event.pageX,
           top: event.pageY
         };
-
-        // console.log(pos.cursor);
-        // console.log('element');
-        // console.log(pos.element);
-        // console.log(pos.parents);
 
         pos.element = elem.offset();
 
