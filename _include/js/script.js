@@ -4,8 +4,7 @@
       button:$('.ready'),
       content:$(".content"),
       allPicture:$(".picture"),
-      container:$(".container"),
-    //outBorder:coordinates = {}
+      container:$(".container")
     };
 
     detect (data);
