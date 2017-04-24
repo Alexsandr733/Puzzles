@@ -3,9 +3,9 @@
     var data = {
       button:$('.ready'),
       content:$(".content"),
-       allPicture:$(".picture"),
-       container:$(".container"),
-    //   outBorder:coordinates = {}
+      allPicture:$(".picture"),
+      container:$(".container"),
+    //outBorder:coordinates = {}
     };
 
     detect (data);
