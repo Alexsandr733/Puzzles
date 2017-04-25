@@ -86,10 +86,12 @@ body {
 
 .pazzl{
   position: absolute;
-  width: 120px;
-  height: 120px;
+  box-sizing: border-box;
+  width: 124px;
+  height: 124px;
   display: table-cell;
   border:2px solid #FFFFFF;
+
 }
 
 .picture.pic0-0{

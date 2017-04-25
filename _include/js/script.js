@@ -8,6 +8,13 @@
       doc:$(document)
     };
 
+    var busyX = [];
+    var busyY = [];
+
+    data.busyX = busyX;
+    data.busyY = busyY;
+
+
     detect (data);
     randomPoz (data);
     drag (data);

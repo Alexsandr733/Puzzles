@@ -42,6 +42,7 @@
     var elems = obj.allPicture;
     var doc  = obj.doc;
 
+
     // События нажатия
     elems.on('mousedown', function(event) {
 
@@ -56,7 +57,7 @@
       pos.starting = {
         left:position.left,
         top:position.top
-      }
+      };
 
       // Запомнить позицию курсора относительно элемента
       pos.inner = {
@@ -106,15 +107,17 @@
 
         elem.css(pos.new_pos);
 
-
       doc.on('mouseup', function() {
         var trigger = 0;
+
+        // var iter = busyX.length;
+
         for (var i=1; i<=3; i++){
 
           // генерируем координаты ячеек
           var coorY;
           if (i == 1) {
-            coorY = 10;
+            coorY = 12;
           }
           else{
             coorY += 120;
@@ -124,15 +127,15 @@
 
             var coorX;
             if (j == 1) {
-              coorX = 40;
+              coorX = 42;
             }
             else{
               coorX += 120;
             }
 
             // находим крайние точки ячеек
-            var coorRX = coorX + 120;
-            var coorRY = coorY + 120;
+            var coorRX = coorX + 124;
+            var coorRY = coorY + 124;
 
             // проверяем попадает ли центр элемента внутрь ячейки
             if (pos.centerX>coorX && pos.centerX < coorRX && pos.centerY>coorY && pos.centerY < coorRY) {
@@ -141,9 +144,13 @@
               pos.new_pos.top = coorY;
               pos.new_pos.left = coorX;
 
-              trigger++;
+              console.log( pos.new_pos);
 
+
+
+              trigger++;
             }
+
           }
         }
 
@@ -154,9 +161,10 @@
 
         }
 
-          elem.animate({left: pos.new_pos.left, top: pos.new_pos.top}, 1000, function() {
+          elem.animate({left: pos.new_pos.left, top: pos.new_pos.top}, 100, function() {
             console.log("Success");
             elem.stop(true);
+            doc.off("mouseup");
 
           });
         });
