@@ -65,7 +65,7 @@ body {
   position: absolute;
   width: 120px;
   height: 120px;
-  border:2px solid #FFFFFF;
+  /*border:2px solid #FFFFFF;*/
   z-index: 99;
 }
 
@@ -135,41 +135,41 @@ body {
 }
 
 .pazzl.p2{
-  left:170;
+  left:160;
   top:10;
 }
 
 .pazzl.p3{
-  left:300;
+  left:280;
   top:10;
 }
 
 .pazzl.p4{
   left:40;
-  top:140;
+  top:130;
 }
 
 .pazzl.p5{
-  left:170;
-  top:140;
+  left:160;
+  top:130;
 }
 
 .pazzl.p6{
-  left:300;
-  top:140;
+  left:280;
+  top:130;
 }
 
 .pazzl.p7{
   left:40;
-  top:270;
+  top:250;
 }
 
 .pazzl.p8{
-  left:170;
-  top:270;
+  left:160;
+  top:250;
 }
 
 .pazzl.p9{
-  left:300;
-  top:270;
+  left:280;
+  top:250;
 }
