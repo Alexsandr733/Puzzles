@@ -6,7 +6,10 @@
       allPicture:$(".picture"),
       container:$(".container"),
       doc:$(document)
+
     };
+
+    data.iter = 0;
 
     var busyX = [];
     var busyY = [];

@@ -106,7 +106,7 @@
         pos.centerY = pos.new_pos.top + 60;
 
         elem.css(pos.new_pos);
-
+      //var iter = 0;
       doc.on('mouseup', function() {
         var trigger = 0;
 
@@ -144,13 +144,28 @@
               pos.new_pos.top = coorY;
               pos.new_pos.left = coorX;
 
-              console.log( pos.new_pos);
-
 
 
               trigger++;
-            }
+              if (obj.busyX.length != 0){
+                for (var z = 0; z < obj.busyX.length; z++) {
+                  if (obj.busyX[z] == coorX && obj.busyY[z] == coorY){
+                    trigger = 0;
+                  }
+                }
+              }
 
+              obj.busyX[obj.iter] = coorX;
+              obj.busyY[obj.iter] = coorY;
+
+              console.log(obj.busyX);
+              console.log(obj.iter);
+              console.log(obj.iter);
+
+              // obj.busyX.push(coorX);
+              // obj.busyY.push(coorY);
+              // console.log(obj.busyX);
+            }
           }
         }
 
@@ -166,6 +181,7 @@
             elem.stop(true);
             doc.off("mouseup");
 
+            obj.iter += 1;
           });
         });
       });
