@@ -4,9 +4,8 @@
       button:$('.ready'),
       content:$(".content"),
       allPicture:$(".picture"),
-
       container:$(".container"),
-      doc:$("document")
+      doc:$(document)
     };
 
     detect (data);

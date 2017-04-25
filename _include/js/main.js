@@ -106,7 +106,8 @@
 
         elem.css(pos.new_pos);
 
-        elem.on('mouseup', function() {
+
+      doc.on('mouseup', function() {
         var trigger = 0;
         for (var i=1; i<=3; i++){
 
@@ -128,8 +129,7 @@
             else{
               coorX += 120;
             }
-            console.log(coorX);
-            console.log(coorY);
+
             // находим крайние точки ячеек
             var coorRX = coorX + 120;
             var coorRY = coorY + 120;
@@ -157,19 +157,15 @@
           elem.animate({left: pos.new_pos.left, top: pos.new_pos.top}, 1000, function() {
             console.log("Success");
             elem.stop(true);
+
           });
-
         });
-
-
-
-      //  elem.css(pos.new_pos);
       });
 
-    elem.on('mouseup', function() {
+  doc.on('mouseup', function() {
 
       // Снять события перетаскивания и отжатия мыши
-      elem.off("mouseup");
+      doc.off("mouseup");
       parents.off("mousemove");
       });
     });
