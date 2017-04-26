@@ -56,12 +56,13 @@
     elems.on('mousedown', function(event) {
 
       var elem = $(this);
-
+      // получаю начальные координаты элемента 
       var position = elem.position();
 
       //var elem = event.target.className;
       var pos = {};
-      //starting:position
+
+      // сохраняю координаты элемента
       pos.starting = {
         left:position.left,
         top:position.top
@@ -134,8 +135,6 @@
 
               trigger++;
 
-            //  console.log(elem.data("pos"));
-
               for (var ii = 0; ii < 9; ii++) {
                 if ((obj.picture[ii].data().pos.left == coorX) && (obj.picture[ii].data().pos.top == coorY)) {
                   trigger = 0;
@@ -166,11 +165,10 @@
               pos.new_pos.top = pos.starting.top;
               pos.new_pos.left = pos.starting.left;
 
-              //
-              // console.log( elem.data().pos.top + "111");
+
               // pos.new_pos.top = elem.data().pos.top;
               // pos.new_pos.left = elem.data().pos.left;
-              // console.log(elem.data().pos.top + "222");
+
 
             }
 
