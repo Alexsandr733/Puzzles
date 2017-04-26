@@ -5,7 +5,8 @@
       content:$(".content"),
       allPicture:$(".picture"),
       container:$(".container"),
-      doc:$(document)
+      doc:$(document),
+      butt:$(".ready"),
 
     };
 
@@ -17,9 +18,9 @@
     data.busyX = busyX;
     data.busyY = busyY;
 
-
     detect (data);
     randomPoz (data);
     drag (data);
+
 
   });

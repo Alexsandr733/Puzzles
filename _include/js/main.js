@@ -10,12 +10,16 @@
     for( var i = 0; i < 9; i++){
 
     png[i] = obj.content.find(".picture").eq(i);
+    png[i].data({pos: png[i].position()});
     cell[i] = obj.content.find(".pazzl").eq(i);
 
     }
+
     obj.picture = png;
     obj.pazzle = cell;
 
+    // console.log(obj.picture);
+    // console.log(obj.allPicture);
   }
 
   function randomPoz (obj) {
@@ -29,6 +33,11 @@
 
         obj.picture[index].addClass('pic' + i + "-" + j);
         obj.picture[index].css({left: randX, top: randY});
+        obj.picture[index].data({pos: obj.picture[index].position()});
+
+        // console.log(obj.picture[index].data().pos.left);
+        // console.log(obj.picture[index].data().pos.top);
+        // console.log('111111111');
 
         index++;
       }
@@ -40,8 +49,8 @@
 
     var parents = obj.content;
     var elems = obj.allPicture;
+    //var elems = obj.picture;
     var doc  = obj.doc;
-
 
     // События нажатия
     elems.on('mousedown', function(event) {
@@ -49,7 +58,6 @@
       var elem = $(this);
 
       var position = elem.position();
-
 
       //var elem = event.target.className;
       var pos = {};
@@ -110,28 +118,8 @@
       doc.on('mouseup', function() {
         var trigger = 0;
 
-        // var iter = busyX.length;
-
-        for (var i=1; i<=3; i++){
-
-          // генерируем координаты ячеек
-          var coorY;
-          if (i == 1) {
-            coorY = 12;
-          }
-          else{
-            coorY += 120;
-          }
-
-          for (var j=1; j<=3; j++){
-
-            var coorX;
-            if (j == 1) {
-              coorX = 42;
-            }
-            else{
-              coorX += 120;
-            }
+        for (var coorY=12; coorY<=252; coorY+=120){
+            for (var coorX=42; coorX<=282; coorX+=120){
 
             // находим крайние точки ячеек
             var coorRX = coorX + 124;
@@ -144,37 +132,52 @@
               pos.new_pos.top = coorY;
               pos.new_pos.left = coorX;
 
-
-
               trigger++;
-              if (obj.busyX.length != 0){
-                for (var z = 0; z < obj.busyX.length; z++) {
-                  if (obj.busyX[z] == coorX && obj.busyY[z] == coorY){
-                    trigger = 0;
-                  }
+
+            //  console.log(elem.data("pos"));
+
+              for (var ii = 0; ii < 9; ii++) {
+                if ((obj.picture[ii].data().pos.left == coorX) && (obj.picture[ii].data().pos.top == coorY)) {
+                  trigger = 0;
+
+                  pos.new_pos.top = pos.starting.top;
+                  pos.new_pos.left = pos.starting.left;
+
+                }
+              }
+
+              var name = event.target.className;
+              console.log(name);
+              for (var k = 0; k < 9; k++) {
+                if ( obj.picture[k].hasClass(name) ) {
+                  console.log('зашли');
+                  console.log(obj.picture[k]);
+                  // obj.picture[k].data({pos: obj.picture[k].position()});
+                  obj.picture[k].data({pos: {left: coorX, top: coorY}});
                 }
               }
 
               obj.busyX[obj.iter] = coorX;
               obj.busyY[obj.iter] = coorY;
 
-              console.log(obj.busyX);
-              console.log(obj.iter);
-              console.log(obj.iter);
-
-              // obj.busyX.push(coorX);
-              // obj.busyY.push(coorY);
-              // console.log(obj.busyX);
             }
+            if (trigger == 0) {
+
+              pos.new_pos.top = pos.starting.top;
+              pos.new_pos.left = pos.starting.left;
+
+              //
+              // console.log( elem.data().pos.top + "111");
+              // pos.new_pos.top = elem.data().pos.top;
+              // pos.new_pos.left = elem.data().pos.left;
+              // console.log(elem.data().pos.top + "222");
+
+            }
+
           }
         }
 
-        if (trigger == 0) {
-
-          pos.new_pos.top = pos.starting.top;
-          pos.new_pos.left = pos.starting.left;
-
-        }
+// nen
 
           elem.animate({left: pos.new_pos.left, top: pos.new_pos.top}, 100, function() {
             console.log("Success");
