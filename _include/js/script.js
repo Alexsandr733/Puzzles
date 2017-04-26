@@ -6,21 +6,11 @@
       allPicture:$(".picture"),
       container:$(".container"),
       doc:$(document),
-      butt:$(".ready"),
-
+      iter:0
     };
-
-    data.iter = 0;
-
-    var busyX = [];
-    var busyY = [];
-
-    data.busyX = busyX;
-    data.busyY = busyY;
 
     detect (data);
     randomPoz (data);
-
     drag (data);
 
 
