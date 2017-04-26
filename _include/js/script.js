@@ -20,6 +20,7 @@
 
     detect (data);
     randomPoz (data);
+
     drag (data);
 
 

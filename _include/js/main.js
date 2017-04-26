@@ -18,8 +18,6 @@
     obj.picture = png;
     obj.pazzle = cell;
 
-    // console.log(obj.picture);
-    // console.log(obj.allPicture);
   }
 
   function randomPoz (obj) {
@@ -35,14 +33,12 @@
         obj.picture[index].css({left: randX, top: randY});
         obj.picture[index].data({pos: obj.picture[index].position()});
 
-        // console.log(obj.picture[index].data().pos.left);
-        // console.log(obj.picture[index].data().pos.top);
-        // console.log('111111111');
-
         index++;
       }
     }
   }
+
+
 
   // начинаем двигать
   function drag (obj){
@@ -56,7 +52,7 @@
     elems.on('mousedown', function(event) {
 
       var elem = $(this);
-      // получаю начальные координаты элемента 
+      // получаю начальные координаты элемента
       var position = elem.position();
 
       //var elem = event.target.className;
@@ -119,69 +115,54 @@
       doc.on('mouseup', function() {
         var trigger = 0;
 
+
         for (var coorY=12; coorY<=252; coorY+=120){
-            for (var coorX=42; coorX<=282; coorX+=120){
+          for (var coorX=42; coorX<=282; coorX+=120){
 
             // находим крайние точки ячеек
-            var coorRX = coorX + 124;
-            var coorRY = coorY + 124;
+          var coorRX = coorX + 124;
+          var coorRY = coorY + 124;
 
-            // проверяем попадает ли центр элемента внутрь ячейки
-            if (pos.centerX>coorX && pos.centerX < coorRX && pos.centerY>coorY && pos.centerY < coorRY) {
+          // проверяем попадает ли центр элемента внутрь ячейки
+          if (pos.centerX>coorX && pos.centerX < coorRX && pos.centerY>coorY && pos.centerY < coorRY) {
 
-              // задаём в качестве новых координатов элемента координаты ячейки
-              pos.new_pos.top = coorY;
-              pos.new_pos.left = coorX;
+            // задаём в качестве новых координатов элемента координаты ячейки
+            pos.new_pos.top = coorY;
+            pos.new_pos.left = coorX;
 
-              trigger++;
+            trigger++;
 
-              for (var ii = 0; ii < 9; ii++) {
-                if ((obj.picture[ii].data().pos.left == coorX) && (obj.picture[ii].data().pos.top == coorY)) {
-                  trigger = 0;
+            // проверка на повторную ячейку
+            if (obj.iter !=0 ){
+              for (var i = 0; i < 9; i++) {
+                if ((obj.picture[i].position().left == coorX) && (obj.picture[i].position().top == coorY)) {
 
-                  pos.new_pos.top = pos.starting.top;
-                  pos.new_pos.left = pos.starting.left;
+                  pos.new_pos.top = obj.picture[i].data().pos.top;
+                  pos.new_pos.left = obj.picture[i].data().pos.left;
 
+                  }
                 }
               }
-
-              var name = event.target.className;
-              console.log(name);
-              for (var k = 0; k < 9; k++) {
-                if ( obj.picture[k].hasClass(name) ) {
-                  console.log('зашли');
-                  console.log(obj.picture[k]);
-                  // obj.picture[k].data({pos: obj.picture[k].position()});
-                  obj.picture[k].data({pos: {left: coorX, top: coorY}});
-                }
-              }
-
-              obj.busyX[obj.iter] = coorX;
-              obj.busyY[obj.iter] = coorY;
-
             }
-            if (trigger == 0) {
-
-              pos.new_pos.top = pos.starting.top;
-              pos.new_pos.left = pos.starting.left;
-
-
-              // pos.new_pos.top = elem.data().pos.top;
-              // pos.new_pos.left = elem.data().pos.left;
-
-
-            }
-
           }
         }
 
-// nen
+        // перемешение если mouseup сработала не над сеткой
+        if (trigger == 0) {
+          var name = event.target.className;
+          for (var j = 0; j < 9; j++) {
+            if ( obj.picture[j].hasClass(name) ) {
+
+              pos.new_pos.top = obj.picture[j].data().pos.top;
+              pos.new_pos.left = obj.picture[j].data().pos.left;
+            }
+          }
+        }
 
           elem.animate({left: pos.new_pos.left, top: pos.new_pos.top}, 100, function() {
             console.log("Success");
             elem.stop(true);
             doc.off("mouseup");
-
             obj.iter += 1;
           });
         });
