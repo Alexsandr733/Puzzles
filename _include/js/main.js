@@ -11,12 +11,10 @@
 
       png[i] = obj.content.find(".picture").eq(i);
       png[i].data({pos: png[i].position()});
-      cell[i] = obj.content.find(".pazzl").eq(i);
 
     }
 
   obj.picture = png;
-  obj.pazzle = cell;
 
   }
 
@@ -100,9 +98,7 @@
 
         doc.on('mouseup', function() {
 
-          pos.new_pos = elem.data().pos;
-
-          //console.log(obj.picture[1].position());
+          pos.new_pos = $.extend( true, {}, elem.data().pos);
 
           for (var coorY = 12; coorY <= 252; coorY += 120){
             for (var coorX = 42; coorX <= 282; coorX += 120){
@@ -123,13 +119,8 @@
 
                   if (obj.picture[i].position().left == coorX && obj.picture[i].position().top == coorY) {
 
+                    pos.new_pos = $.extend( true, {}, elem.data().pos);
 
-                    pos.new_pos = elem.data().pos;
-
-                    //  pos.new_pos.top = obj.picture[i].data().pos.top;
-                    //  pos.new_pos.left = obj.picture[i].data().pos.left;
-
-                    //pos.new_pos = obj.picture[i].data.pos;
                     break;
                   }
                 }
