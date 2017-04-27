@@ -100,9 +100,8 @@
 
         doc.on('mouseup', function() {
 
-        //  pos.new_pos = elem.data().pos;
-          console.log(elem.data().pos);
-          console.log(obj.picture[1].data().pos.top);
+          pos.new_pos = elem.data().pos;
+
           //console.log(obj.picture[1].position());
 
           for (var coorY = 12; coorY <= 252; coorY += 120){
@@ -125,7 +124,7 @@
                   if (obj.picture[i].position().left == coorX && obj.picture[i].position().top == coorY) {
 
 
-                    //pos.new_pos = elem.data().pos;
+                    pos.new_pos = elem.data().pos;
 
                      pos.new_pos.top = obj.picture[i].data().pos.top;
                      pos.new_pos.left = obj.picture[i].data().pos.left;
