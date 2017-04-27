@@ -54,6 +54,8 @@
         top: event.offsetY
       };
 
+      elem.css({zIndex: 110});
+
       // Событие перетаскивания
       parents.on('mousemove', function(event) {
 
@@ -98,6 +100,8 @@
 
         doc.on('mouseup', function() {
 
+          elem.css({zIndex: 99});
+
           pos.new_pos = $.extend( true, {}, elem.data().pos);
 
           for (var coorY = 12; coorY <= 252; coorY += 120){
@@ -110,19 +114,20 @@
               // проверяем попадает ли центр элемента внутрь ячейки
               if (pos.centerX > coorX && pos.centerX < coorRX && pos.centerY > coorY && pos.centerY < coorRY) {
 
-                // задаём в качестве новых координатов элемента координаты ячейки
-                pos.new_pos.top = coorY;
-                pos.new_pos.left = coorX;
-
+                // Зафиксировать фрагмент?
+                var fix = true
                 // проверка на повторную ячейку
                 for (var i = 0; i < 9; i++) {
-
                   if (obj.picture[i].position().left == coorX && obj.picture[i].position().top == coorY) {
-
-                    pos.new_pos = $.extend( true, {}, elem.data().pos);
-
+                    fix = false
                     break;
                   }
+                }
+
+                if (fix) {
+                  // задаём в качестве новых координатов элемента координаты ячейки
+                  pos.new_pos.top = coorY;
+                  pos.new_pos.left = coorX;
                 }
                 break;
               }
@@ -132,16 +137,9 @@
           elem.animate({left: pos.new_pos.left, top: pos.new_pos.top}, 100, function() {
             elem.stop(true);
             doc.off("mouseup");
-
+            parents.off("mousemove");
           });
         });
-      });
-
-      doc.on('mouseup', function() {
-
-      // Снять события перетаскивания и отжатия мыши
-      doc.off("mouseup");
-      parents.off("mousemove");
       });
     });
   }
