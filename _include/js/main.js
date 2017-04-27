@@ -126,8 +126,8 @@
 
                     pos.new_pos = elem.data().pos;
 
-                     pos.new_pos.top = obj.picture[i].data().pos.top;
-                     pos.new_pos.left = obj.picture[i].data().pos.left;
+                    //  pos.new_pos.top = obj.picture[i].data().pos.top;
+                    //  pos.new_pos.left = obj.picture[i].data().pos.left;
 
                     //pos.new_pos = obj.picture[i].data.pos;
                     break;
