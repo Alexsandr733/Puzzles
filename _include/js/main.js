@@ -130,11 +130,9 @@
           }
 
           elem.animate({left: pos.new_pos.left, top: pos.new_pos.top}, 100, function() {
-            console.log("Success");
             elem.stop(true);
             doc.off("mouseup");
 
-            obj.iter +=1;
           });
         });
       });
