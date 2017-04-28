@@ -15,8 +15,8 @@
 
     }
 
-  obj.picture = png;
-  obj.pazzle = cell;
+    obj.picture = png;
+    obj.pazzle = cell;
 
   }
 
@@ -26,13 +26,13 @@
     for (var i=0; i<=2; i++){
       for (var j=0; j<=2; j++){
 
-        var pos = {left: getRandom(510, 770), top: getRandom(10, 270)};
+      var pos = {left: getRandom(510, 770), top: getRandom(10, 270)};
 
-        obj.picture[index].addClass('pic' + i + "-" + j);
-        obj.picture[index].css(pos);
-        obj.picture[index].data({pos: pos});
+      obj.picture[index].addClass('pic' + i + "-" + j);
+      obj.picture[index].css(pos);
+      obj.picture[index].data({pos: pos});
 
-        index++;
+      index++;
       }
     }
   }
@@ -153,10 +153,10 @@
 
     obj.button.on('mouseup', function() {
 
-    if (obj.butOn){
+      if (obj.butOn){
 
-        mass = [];
-        posRet = {};
+        var mass = [];
+        var posRet = {};
 
         var index = 0;
         for (var coorY = 12; coorY <= 252; coorY += 120){
@@ -181,7 +181,9 @@
 
             obj.button.addClass('wrong');
             setTimeout(function () {
-              obj.button.removeClass("wrong");
+
+              obj.button.removeClass('wrong');
+
             }, 1000);
             err = true;
           }
@@ -193,18 +195,18 @@
 
           obj.errormess.show();
           setTimeout(function () {
-              obj.errormess.hide();
-              obj.stopDrag = true;
-          }, 1000);
 
-          right = false;
+            obj.errormess.hide();
+            obj.stopDrag = true;
+
+          }, 1000);
         }
         else {
 
           obj.stopDrag = false;
           setTimeout(function () {
 
-              obj.scene.hide("slow");
+            obj.scene.hide("slow");
 
           }, 2000);
         }
