@@ -173,15 +173,7 @@
 
         for (var i = 0; i < 9; i++) {
 
-          var retBack = true;
-          var right = false;
-
-          if (obj.picture[i].position().left == mass[i].left && obj.picture[i].position().top == mass[i].top){
-
-            retBack = false;
-            right = true;
-          }
-          if (retBack) {
+          if (!(obj.picture[i].position().left == mass[i].left && obj.picture[i].position().top == mass[i].top)){
 
             posRet = $.extend( true, {}, obj.picture[i].data().pos);
 
@@ -189,7 +181,7 @@
 
             obj.button.addClass('wrong');
             setTimeout(function () {
-               obj.button.removeClass("wrong");
+              obj.button.removeClass("wrong");
             }, 1000);
             err = true;
           }
@@ -207,8 +199,9 @@
 
           right = false;
         }
-        if (right){
+        else {
 
+          obj.stopDrag = false;
           setTimeout(function () {
 
               obj.scene.hide("slow");
