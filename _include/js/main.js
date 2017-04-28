@@ -11,10 +11,12 @@
 
       png[i] = obj.content.find(".picture").eq(i);
       png[i].data({pos: png[i].position()});
+      cell[i] = obj.content.find(".pazzl").eq(i);
 
     }
 
   obj.picture = png;
+  obj.pazzle = cell;
 
   }
 
@@ -115,11 +117,11 @@
               if (pos.centerX > coorX && pos.centerX < coorRX && pos.centerY > coorY && pos.centerY < coorRY) {
 
                 // Зафиксировать фрагмент?
-                var fix = true
+                var fix = true;
                 // проверка на повторную ячейку
                 for (var i = 0; i < 9; i++) {
                   if (obj.picture[i].position().left == coorX && obj.picture[i].position().top == coorY) {
-                    fix = false
+                    fix = false;
                     break;
                   }
                 }
@@ -142,4 +144,42 @@
         });
       });
     });
+  }
+
+  function check(obj){
+
+    obj.button.on('mouseup', function() {
+
+      mass = [];
+      posRet = {};
+
+      var index = 0;
+      for (var coorY = 12; coorY <= 252; coorY += 120){
+        for (var coorX = 42; coorX <= 282; coorX += 120){
+          mass[index] = posi = {
+            left: coorX,
+            top: coorY
+          };
+          index++;
+        }
+      }
+
+      for (var i = 0; i < 9; i++) {
+
+        var retBack = true;
+
+        if (obj.picture[i].position().left == mass[i].left && obj.picture[i].position().top == mass[i].top){
+
+          retBack = false;
+        }
+        if (retBack) {
+
+          posRet.left = obj.picture[i].data().pos.left;
+          posRet.top = obj.picture[i].data().pos.top;
+
+          obj.picture[i].animate({left: posRet.left, top: posRet.top}, 100);
+        }
+      }
+    });
+    //obj.button.off('mouseup')
   }
