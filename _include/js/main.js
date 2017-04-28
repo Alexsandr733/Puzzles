@@ -46,103 +46,106 @@
 
     // События нажатия
     elems.on('mousedown', function(event) {
+      if (obj.stopDrag){
 
-      var elem = $(this);
-      var pos = {};
+        var elem = $(this);
+        var pos = {};
 
-      // Запомнить позицию курсора относительно элемента
-      pos.inner = {
-        left: event.offsetX,
-        top: event.offsetY
-      };
-
-      elem.css({zIndex: 110});
-
-      // Событие перетаскивания
-      parents.on('mousemove', function(event) {
-
-        // Позиция родителя относительно экрана
-        pos.parents = parents.offset();
-
-        // Позиция курсора относительно экрана
-        pos.cursor = {
-          left: event.pageX,
-          top: event.pageY
+        // Запомнить позицию курсора относительно элемента
+        pos.inner = {
+          left: event.offsetX,
+          top: event.offsetY
         };
 
-        // Новая позиция элемента
-        pos.new_pos = {
-          top: pos.cursor.top - pos.parents.top - pos.inner.top,
-          left: pos.cursor.left - pos.parents.left - pos.inner.left
-        };
+        elem.css({zIndex: 110});
 
-        // Ограничение перемещения элемента
-        if (pos.new_pos.left < 0){
-          pos.new_pos.left = 0;
-        }
-        if (pos.new_pos.top < 0){
-          pos.new_pos.top = 0;
-        }
+        // Событие перетаскивания
+        parents.on('mousemove', function(event) {
 
-        var width = parents.outerWidth() - 120;
-        var height =  parents.outerHeight() - 120;
+          // Позиция родителя относительно экрана
+          pos.parents = parents.offset();
 
-        if (pos.new_pos.left > width){
-          pos.new_pos.left = width;
-        }
-        if (pos.new_pos.top > height){
-          pos.new_pos.top = height;
-        }
+          // Позиция курсора относительно экрана
+          pos.cursor = {
+            left: event.pageX,
+            top: event.pageY
+          };
 
-        // находим центр элемента
-        pos.centerX = pos.new_pos.left + 60;
-        pos.centerY = pos.new_pos.top + 60;
+          // Новая позиция элемента
+          pos.new_pos = {
+            top: pos.cursor.top - pos.parents.top - pos.inner.top,
+            left: pos.cursor.left - pos.parents.left - pos.inner.left
+          };
 
-        elem.css(pos.new_pos);
-
-        doc.on('mouseup', function() {
-
-          elem.css({zIndex: 99});
-
-          pos.new_pos = $.extend( true, {}, elem.data().pos);
-
-          for (var coorY = 12; coorY <= 252; coorY += 120){
-            for (var coorX = 42; coorX <= 282; coorX += 120){
-
-              // находим крайние точки ячеек
-              var coorRX = coorX + 124;
-              var coorRY = coorY + 124;
-
-              // проверяем попадает ли центр элемента внутрь ячейки
-              if (pos.centerX > coorX && pos.centerX < coorRX && pos.centerY > coorY && pos.centerY < coorRY) {
-
-                // Зафиксировать фрагмент?
-                var fix = true;
-                // проверка на повторную ячейку
-                for (var i = 0; i < 9; i++) {
-                  if (obj.picture[i].position().left == coorX && obj.picture[i].position().top == coorY) {
-                    fix = false;
-                    break;
-                  }
-                }
-
-                if (fix) {
-                  // задаём в качестве новых координатов элемента координаты ячейки
-                  pos.new_pos.top = coorY;
-                  pos.new_pos.left = coorX;
-                }
-                break;
-              }
-            }
+          // Ограничение перемещения элемента
+          if (pos.new_pos.left < 0){
+            pos.new_pos.left = 0;
+          }
+          if (pos.new_pos.top < 0){
+            pos.new_pos.top = 0;
           }
 
-          elem.animate({left: pos.new_pos.left, top: pos.new_pos.top}, 100, function() {
-            elem.stop(true);
-            doc.off("mouseup");
-            parents.off("mousemove");
+          var width = parents.outerWidth() - 120;
+          var height =  parents.outerHeight() - 120;
+
+          if (pos.new_pos.left > width){
+            pos.new_pos.left = width;
+          }
+          if (pos.new_pos.top > height){
+            pos.new_pos.top = height;
+          }
+
+          // находим центр элемента
+          pos.centerX = pos.new_pos.left + 60;
+          pos.centerY = pos.new_pos.top + 60;
+
+          elem.css(pos.new_pos);
+
+          doc.on('mouseup', function() {
+
+            elem.css({zIndex: 99});
+
+            pos.new_pos = $.extend( true, {}, elem.data().pos);
+
+            for (var coorY = 12; coorY <= 252; coorY += 120){
+              for (var coorX = 42; coorX <= 282; coorX += 120){
+
+                // находим крайние точки ячеек
+                var coorRX = coorX + 124;
+                var coorRY = coorY + 124;
+
+                // проверяем попадает ли центр элемента внутрь ячейки
+                if (pos.centerX > coorX && pos.centerX < coorRX && pos.centerY > coorY && pos.centerY < coorRY) {
+
+                  // Зафиксировать фрагмент?
+                  var fix = true;
+                  // проверка на повторную ячейку
+                  for (var i = 0; i < 9; i++) {
+                    if (obj.picture[i].position().left == coorX && obj.picture[i].position().top == coorY) {
+                      fix = false;
+                      break;
+                    }
+                  }
+
+                  if (fix) {
+                    // задаём в качестве новых координатов элемента координаты ячейки
+                    pos.new_pos.top = coorY;
+                    pos.new_pos.left = coorX;
+                    obj.butOn = true;
+                  }
+                  break;
+                }
+              }
+            }
+
+            elem.animate({left: pos.new_pos.left, top: pos.new_pos.top}, 100, function() {
+              elem.stop(true);
+              doc.off("mouseup");
+              parents.off("mousemove");
+            });
           });
         });
-      });
+      }
     });
   }
 
@@ -150,36 +153,67 @@
 
     obj.button.on('mouseup', function() {
 
-      mass = [];
-      posRet = {};
+    if (obj.butOn){
 
-      var index = 0;
-      for (var coorY = 12; coorY <= 252; coorY += 120){
-        for (var coorX = 42; coorX <= 282; coorX += 120){
-          mass[index] = posi = {
-            left: coorX,
-            top: coorY
-          };
-          index++;
+        mass = [];
+        posRet = {};
+
+        var index = 0;
+        for (var coorY = 12; coorY <= 252; coorY += 120){
+          for (var coorX = 42; coorX <= 282; coorX += 120){
+            mass[index] = {
+              left: coorX,
+              top: coorY
+            };
+            index++;
+          }
         }
-      }
 
-      for (var i = 0; i < 9; i++) {
+        var err = false;
 
-        var retBack = true;
+        for (var i = 0; i < 9; i++) {
 
-        if (obj.picture[i].position().left == mass[i].left && obj.picture[i].position().top == mass[i].top){
+          var retBack = true;
+          var right = false;
 
-          retBack = false;
+          if (obj.picture[i].position().left == mass[i].left && obj.picture[i].position().top == mass[i].top){
+
+            retBack = false;
+            right = true;
+          }
+          if (retBack) {
+
+            posRet = $.extend( true, {}, obj.picture[i].data().pos);
+
+            obj.picture[i].animate({left: posRet.left, top: posRet.top}, 100);
+
+            obj.button.addClass('wrong');
+            setTimeout(function () {
+               obj.button.removeClass("wrong");
+            }, 1000);
+            err = true;
+          }
         }
-        if (retBack) {
+        if (err) {
 
-          posRet = $.extend( true, {}, obj.picture[i].data().pos);
+          obj.stopDrag = false;
+          obj.butOn = false;
 
-          // posRet.left = obj.picture[i].data().pos.left;
-          // posRet.top = obj.picture[i].data().pos.top;
+          obj.errormess.show();
+          setTimeout(function () {
+              obj.errormess.hide();
+              obj.stopDrag = true;
+          }, 1000);
 
-          obj.picture[i].animate({left: posRet.left, top: posRet.top}, 100);
+          right = false;
+        }
+        if (right){
+
+          setTimeout(function () {
+
+              obj.scene.hide("slow");
+
+          }, 2000);
         }
       }
     });
