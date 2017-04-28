@@ -174,12 +174,13 @@
         }
         if (retBack) {
 
-          posRet.left = obj.picture[i].data().pos.left;
-          posRet.top = obj.picture[i].data().pos.top;
+          posRet = $.extend( true, {}, obj.picture[i].data().pos);
+
+          // posRet.left = obj.picture[i].data().pos.left;
+          // posRet.top = obj.picture[i].data().pos.top;
 
           obj.picture[i].animate({left: posRet.left, top: posRet.top}, 100);
         }
       }
     });
-    //obj.button.off('mouseup')
   }
