@@ -1,3 +1,4 @@
+
 /*Сделать весь текст невыделяемым*/
 * {
   -moz-user-select: none;
@@ -5,7 +6,6 @@
   -ms-user-select: none;
   user-select: none;
 }
-
 /*Отключить стандартные отступы тела страницы*/
 body {
   margin: 0;
@@ -35,4 +35,142 @@ body {
   font-size: 36px;
   color: #464242;
   top: 10px;
+}
+
+.title{
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.errormess{
+  display: inline-block;
+  position: absolute;
+  left: 125px;
+  top: 150px;
+  background-color: rgb(209, 197, 138);
+  border-radius: 12px;
+  padding: 5px;
+  z-index: 100;
+  font-size: 32px;
+}
+
+.content{
+  position: relative;
+  display: inline-block;
+  height: 420px;
+  width: 960px;
+}
+
+.picture {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  z-index: 99;
+}
+
+.ready{
+  position:relative;
+  display: inline-block;
+  margin: 10px;
+  font-size: 22px;
+  padding: 3px 7px;
+  border-radius: 5px;
+  border: 2px solid #8BC34A;
+}
+
+.ready.wrong{
+  background-color: rgb(239, 38, 38);
+  border: 2px solid rgb(255, 196, 2);
+}
+
+.pazzl{
+  position: absolute;
+  box-sizing: border-box;
+  width: 124px;
+  height: 124px;
+  display: table-cell;
+  border:2px solid #FFFFFF;
+
+}
+
+.picture.pic0-0{
+  background-image: url('../img/0_0.png');
+}
+
+.picture.pic0-1{
+  background-image: url('../img/0_1.png');
+
+}
+
+.picture.pic0-2{
+  background-image: url('../img/0_2.png');
+}
+
+.picture.pic1-0{
+  background-image: url('../img/1_0.png');
+}
+
+.picture.pic1-1{
+  background-image: url('../img/1_1.png');
+}
+
+.picture.pic1-2{
+  background-image: url('../img/1_2.png');
+}
+
+.picture.pic2-0{
+  background-image: url('../img/2_0.png');
+}
+
+.picture.pic2-1{
+  background-image: url('../img/2_1.png');
+}
+
+.picture.pic2-2{
+  background-image: url('../img/2_2.png');
+}
+
+.pazzl.p1{
+  left:40;
+  top:10;
+}
+
+.pazzl.p2{
+  left:160;
+  top:10;
+}
+
+.pazzl.p3{
+  left:280;
+  top:10;
+}
+
+.pazzl.p4{
+  left:40;
+  top:130;
+}
+
+.pazzl.p5{
+  left:160;
+  top:130;
+}
+
+.pazzl.p6{
+  left:280;
+  top:130;
+}
+
+.pazzl.p7{
+  left:40;
+  top:250;
+}
+
+.pazzl.p8{
+  left:160;
+  top:250;
+}
+
+.pazzl.p9{
+  left:280;
+  top:250;
 }
