@@ -46,106 +46,108 @@
 
     // События нажатия
     elems.on('mousedown', function(event) {
-      if (obj.stopDrag){
 
-        var elem = $(this);
-        var pos = {};
+      var elem = $(this);
+      var pos = {};
 
-        // Запомнить позицию курсора относительно элемента
-        pos.inner = {
-          left: event.offsetX,
-          top: event.offsetY
+      // Запомнить позицию курсора относительно элемента
+      pos.inner = {
+        left: event.offsetX,
+        top: event.offsetY
+      };
+
+      elem.css({zIndex: 110});
+
+      // Событие перетаскивания
+      parents.on('mousemove', function(event) {
+
+        // Позиция родителя относительно экрана
+        pos.parents = parents.offset();
+
+        // Позиция курсора относительно экрана
+        pos.cursor = {
+          left: event.pageX,
+          top: event.pageY
         };
 
-        elem.css({zIndex: 110});
+        // Новая позиция элемента
+        pos.new_pos = {
+          top: pos.cursor.top - pos.parents.top - pos.inner.top,
+          left: pos.cursor.left - pos.parents.left - pos.inner.left
+        };
 
-        // Событие перетаскивания
-        parents.on('mousemove', function(event) {
+        // Ограничение перемещения элемента
+        if (pos.new_pos.left < 0){
+          pos.new_pos.left = 0;
+        }
+        if (pos.new_pos.top < 0){
+          pos.new_pos.top = 0;
+        }
 
-          // Позиция родителя относительно экрана
-          pos.parents = parents.offset();
+        var width = parents.outerWidth() - 120;
+        var height =  parents.outerHeight() - 120;
 
-          // Позиция курсора относительно экрана
-          pos.cursor = {
-            left: event.pageX,
-            top: event.pageY
-          };
+        if (pos.new_pos.left > width){
+          pos.new_pos.left = width;
+        }
+        if (pos.new_pos.top > height){
+          pos.new_pos.top = height;
+        }
 
-          // Новая позиция элемента
-          pos.new_pos = {
-            top: pos.cursor.top - pos.parents.top - pos.inner.top,
-            left: pos.cursor.left - pos.parents.left - pos.inner.left
-          };
+        // находим центр элемента
+        pos.centerX = pos.new_pos.left + 60;
+        pos.centerY = pos.new_pos.top + 60;
 
-          // Ограничение перемещения элемента
-          if (pos.new_pos.left < 0){
-            pos.new_pos.left = 0;
-          }
-          if (pos.new_pos.top < 0){
-            pos.new_pos.top = 0;
-          }
+        elem.css(pos.new_pos);
 
-          var width = parents.outerWidth() - 120;
-          var height =  parents.outerHeight() - 120;
+        doc.on('mouseup', function() {
 
-          if (pos.new_pos.left > width){
-            pos.new_pos.left = width;
-          }
-          if (pos.new_pos.top > height){
-            pos.new_pos.top = height;
-          }
+          elem.css({zIndex: 99});
 
-          // находим центр элемента
-          pos.centerX = pos.new_pos.left + 60;
-          pos.centerY = pos.new_pos.top + 60;
+          pos.new_pos = $.extend( true, {}, elem.data().pos);
 
-          elem.css(pos.new_pos);
+          for (var coorY = 12; coorY <= 252; coorY += 120){
+            for (var coorX = 42; coorX <= 282; coorX += 120){
 
-          doc.on('mouseup', function() {
+            // находим крайние точки ячеек
+            var coorRX = coorX + 124;
+            var coorRY = coorY + 124;
 
-            elem.css({zIndex: 99});
+            // проверяем попадает ли центр элемента внутрь ячейки
+              if (pos.centerX > coorX && pos.centerX < coorRX && pos.centerY > coorY && pos.centerY < coorRY) {
 
-            pos.new_pos = $.extend( true, {}, elem.data().pos);
-
-            for (var coorY = 12; coorY <= 252; coorY += 120){
-              for (var coorX = 42; coorX <= 282; coorX += 120){
-
-                // находим крайние точки ячеек
-                var coorRX = coorX + 124;
-                var coorRY = coorY + 124;
-
-                // проверяем попадает ли центр элемента внутрь ячейки
-                if (pos.centerX > coorX && pos.centerX < coorRX && pos.centerY > coorY && pos.centerY < coorRY) {
-
-                  // Зафиксировать фрагмент?
-                  var fix = true;
-                  // проверка на повторную ячейку
-                  for (var i = 0; i < 9; i++) {
-                    if (obj.picture[i].position().left == coorX && obj.picture[i].position().top == coorY) {
-                      fix = false;
-                      break;
-                    }
+                // Зафиксировать фрагмент?
+                var fix = true;
+                // проверка на повторную ячейку
+                for (var i = 0; i < 9; i++) {
+                  if (obj.picture[i].position().left == coorX && obj.picture[i].position().top == coorY) {
+                    fix = false;
+                    break;
                   }
-
-                  if (fix) {
-                    // задаём в качестве новых координатов элемента координаты ячейки
-                    pos.new_pos.top = coorY;
-                    pos.new_pos.left = coorX;
-                    obj.butOn = true;
-                  }
-                  break;
                 }
+
+                if (fix) {
+                // задаём в качестве новых координатов элемента координаты ячейки
+                  pos.new_pos.top = coorY;
+                  pos.new_pos.left = coorX;
+                }
+                break;
               }
             }
+          }
 
-            elem.animate({left: pos.new_pos.left, top: pos.new_pos.top}, 100, function() {
-              elem.stop(true);
-              doc.off("mouseup");
-              parents.off("mousemove");
-            });
+          elem.animate({left: pos.new_pos.left, top: pos.new_pos.top}, 100, function() {
+          elem.stop(true);
+          doc.off("mouseup");
+          parents.off("mousemove");
           });
         });
-      }
+      });
+      elems.off('mousedown')
+      $.when.apply($, elem).done(function() {
+      check (obj);
+      drag(obj);
+      });
     });
   }
 
@@ -153,63 +155,61 @@
 
     obj.button.on('mouseup', function() {
 
-      if (obj.butOn){
+      var mass = [];
+      var posRet = {};
 
-        var mass = [];
-        var posRet = {};
-
-        var index = 0;
-        for (var coorY = 12; coorY <= 252; coorY += 120){
-          for (var coorX = 42; coorX <= 282; coorX += 120){
-            mass[index] = {
-              left: coorX,
-              top: coorY
-            };
-            index++;
-          }
-        }
-
-        var err = false;
-
-        for (var i = 0; i < 9; i++) {
-
-          if (!(obj.picture[i].position().left == mass[i].left && obj.picture[i].position().top == mass[i].top)){
-
-            posRet = $.extend( true, {}, obj.picture[i].data().pos);
-
-            obj.picture[i].animate({left: posRet.left, top: posRet.top}, 100);
-
-            obj.button.addClass('wrong');
-            setTimeout(function () {
-
-              obj.button.removeClass('wrong');
-
-            }, 1000);
-            err = true;
-          }
-        }
-        if (err) {
-
-          obj.stopDrag = false;
-          obj.butOn = false;
-
-          obj.errormess.show();
-          setTimeout(function () {
-
-            obj.errormess.hide();
-            obj.stopDrag = true;
-
-          }, 1000);
-        }
-        else {
-
-          obj.stopDrag = false;
-          setTimeout(function () {
-
-            obj.scene.hide("slow");
-
-          }, 2000);
+      var index = 0;
+      for (var coorY = 12; coorY <= 252; coorY += 120){
+        for (var coorX = 42; coorX <= 282; coorX += 120){
+          mass[index] = {
+            left: coorX,
+            top: coorY
+          };
+          index++;
         }
       }
+
+      var err = false;
+
+      for (var i = 0; i < 9; i++) {
+
+        if (!(obj.picture[i].position().left == mass[i].left && obj.picture[i].position().top == mass[i].top)){
+
+          posRet = $.extend( true, {}, obj.picture[i].data().pos);
+
+          obj.picture[i].animate({left: posRet.left, top: posRet.top}, 100);
+
+          obj.button.addClass('wrong');
+          setTimeout(function () {
+
+            obj.button.removeClass('wrong');
+
+          }, 1000);
+          err = true;
+        }
+      }
+      if (err) {
+
+        obj.allPicture.off('mousedown');
+
+        obj.errormess.show();
+        setTimeout(function () {
+
+          obj.errormess.hide();
+
+        drag(obj);
+
+        }, 1000);
+      }
+      else {
+
+        obj.allPicture.off('mousedown');
+        setTimeout(function () {
+
+          obj.scene.hide("slow");
+
+        }, 2000);
+      }
+      obj.button.off('mouseup')
     });
   }
