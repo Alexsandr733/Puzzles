@@ -6,13 +6,10 @@ $(document).ready(function() {
     errormess:$(".errormess"),
     content:$(".content"),
     allPicture:$(".picture"),
-    doc:$(document),
-    stopDrag:true,
-    butOn:false
+    doc:$(document)
   };
 
   detect (data);
   randomPoz (data);
   drag (data);
-  check (data);
 });

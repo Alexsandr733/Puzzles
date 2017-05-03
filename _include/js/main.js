@@ -143,7 +143,7 @@
           elem.animate({left: pos.new_pos.left, top: pos.new_pos.top}, 100, function() { //отлавливается окончание
             elem.stop(true);
             check (obj);
-            drag(obj);
+            drag (obj);
           });
         });
       });
@@ -187,29 +187,29 @@
         }
       }
       $.when.apply($, anim).done(function() {
-        obj.button.off('mouseup');
-      });
-      if (err) {
 
-        obj.button.addClass('wrong');
-        obj.errormess.show();
+        if (err) {
 
-        setTimeout(function () {
+          obj.button.addClass('wrong');
+          obj.errormess.show();
+
+          setTimeout(function () {
 
           obj.button.removeClass('wrong');
           obj.errormess.hide();
 
           drag(obj);
-          //check (obj); // ?????
+          check (obj);
 
-        }, 1000);
-      }
-      else {
-        setTimeout(function () {
+          }, 1000);
+        }
+        else {
+          setTimeout(function () {
 
-          obj.scene.hide("slow");
+            obj.scene.hide("slow");
 
-        }, 2000);
-      }
+          }, 2000);
+        }
+      });
     });
   }
