@@ -26,13 +26,13 @@
     for (var i=0; i<=2; i++){
       for (var j=0; j<=2; j++){
 
-      var pos = {left: getRandom(510, 770), top: getRandom(10, 270)};
+        var pos = {left: getRandom(510, 770), top: getRandom(10, 270)};
 
-      obj.picture[index].addClass('pic' + i + "-" + j);
-      obj.picture[index].css(pos);
-      obj.picture[index].data({pos: pos});
+        obj.picture[index].addClass('pic' + i + "-" + j);
+        obj.picture[index].css(pos);
+        obj.picture[index].data({pos: pos});
 
-      index++;
+        index++;
       }
     }
   }
@@ -45,7 +45,10 @@
     var doc  = obj.doc;
 
     // События нажатия
-    elems.on('mousedown', function(event) {
+    elems.on('mousedown', function(event) { // сразу после снять событие
+
+      obj.button.off('mouseup');
+      elems.off('mousedown');
 
       var elem = $(this);
       var pos = {};
@@ -101,6 +104,8 @@
         elem.css(pos.new_pos);
 
         doc.on('mouseup', function() {
+          doc.off('mouseup');
+          parents.off('mousemove');
 
           elem.css({zIndex: 99});
 
@@ -109,11 +114,11 @@
           for (var coorY = 12; coorY <= 252; coorY += 120){
             for (var coorX = 42; coorX <= 282; coorX += 120){
 
-            // находим крайние точки ячеек
-            var coorRX = coorX + 124;
-            var coorRY = coorY + 124;
+              // находим крайние точки ячеек
+              var coorRX = coorX + 124;
+              var coorRY = coorY + 124;
 
-            // проверяем попадает ли центр элемента внутрь ячейки
+              // проверяем попадает ли центр элемента внутрь ячейки
               if (pos.centerX > coorX && pos.centerX < coorRX && pos.centerY > coorY && pos.centerY < coorRY) {
 
                 // Зафиксировать фрагмент?
@@ -135,18 +140,12 @@
               }
             }
           }
-
-          elem.animate({left: pos.new_pos.left, top: pos.new_pos.top}, 100, function() {
-          elem.stop(true);
-          doc.off("mouseup");
-          parents.off("mousemove");
+          elem.animate({left: pos.new_pos.left, top: pos.new_pos.top}, 100, function() { //отлавливается окончание
+            elem.stop(true);
+            check (obj);
+            drag(obj);
           });
         });
-      });
-      elems.off('mousedown')
-      $.when.apply($, elem).done(function() {
-      check (obj);
-      drag(obj);
       });
     });
   }
@@ -154,6 +153,10 @@
   function check(obj){
 
     obj.button.on('mouseup', function() {
+
+      obj.allPicture.off('mousedown');
+      obj.button.off('mouseup');
+
 
       var mass = [];
       var posRet = {};
@@ -170,6 +173,7 @@
       }
 
       var err = false;
+      var anim = [];
 
       for (var i = 0; i < 9; i++) {
 
@@ -177,39 +181,35 @@
 
           posRet = $.extend( true, {}, obj.picture[i].data().pos);
 
-          obj.picture[i].animate({left: posRet.left, top: posRet.top}, 100);
+          anim.push(obj.picture[i].animate({left: posRet.left, top: posRet.top}, 100));
 
-          obj.button.addClass('wrong');
-          setTimeout(function () {
-
-            obj.button.removeClass('wrong');
-
-          }, 1000);
           err = true;
         }
       }
+      $.when.apply($, anim).done(function() {
+        obj.button.off('mouseup');
+      });
       if (err) {
 
-        obj.allPicture.off('mousedown');
-
+        obj.button.addClass('wrong');
         obj.errormess.show();
+
         setTimeout(function () {
 
+          obj.button.removeClass('wrong');
           obj.errormess.hide();
 
-        drag(obj);
+          drag(obj);
+          //check (obj); // ?????
 
         }, 1000);
       }
       else {
-
-        obj.allPicture.off('mousedown');
         setTimeout(function () {
 
           obj.scene.hide("slow");
 
         }, 2000);
       }
-      obj.button.off('mouseup')
     });
   }
